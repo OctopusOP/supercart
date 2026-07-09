@@ -72,6 +72,27 @@ const Profile = () => {
     getUser();
   }, []);
 
+  const logout = async () => {
+    try {
+      const res = await fetch("/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // Clear any local storage data
+        localStorage.removeItem("user");
+        sessionStorage.clear();
+
+        // Redirect to login page
+        window.location.href = "/login";
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   return (
     <>
       <div className="min-h-screen bg-neutral-900 py-10 px-4">
@@ -83,10 +104,15 @@ const Profile = () => {
             </div>
 
             <h1 className="text-2xl font-bold mt-4">My Profile</h1>
-
+            <button
+              onClick={logout}
+              className="mt-4 px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition"
+            >
+              Logout
+            </button>
             <button
               onClick={getUser}
-              className="mt-4 px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition"
+              className="mt-4 px-5 py-2 bg-yellow-500 hover:bg-red-600 text-white rounded-xl transition"
             >
               Refresh Profile
             </button>
