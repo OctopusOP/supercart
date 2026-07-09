@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "supercart",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.110.0",
+    "argon2": "^0.44.0",
+    "axios": "^1.18.0",
+    "jsonwebtoken": "^9.0.3",
     "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-icons": "^5.6.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "unrs-resolver@1.12.2": true
   }
 }
