@@ -2,6 +2,7 @@
 import Button from "@/compoenents/Button";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Spinner from "@/compoenents/Spinner";
 const RegisterPage = () => {
   const [passeye, setPasseye] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -103,7 +104,7 @@ const RegisterPage = () => {
 
           {/* Submit Button Wrapper */}
           <div className="mt-2">
-            <Button name={loading ? "Loading..." : "Register"} />
+            <Button name={loading ? <Spinner/> : "Register"} />
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@
 import Button from "@/compoenents/Button";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Spinner from "@/compoenents/Spinner";
 const LoginPage = () => {
   const [passeye, setPasseye] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,6 @@ const LoginPage = () => {
     setLoading(true);
     e.preventDefault();
     const form = e.currentTarget;
-
     try {
       const formData = new FormData(e.currentTarget);
       const { userinfo, password } = Object.fromEntries(formData);
@@ -87,7 +87,7 @@ const LoginPage = () => {
 
           {/* Submit Button Wrapper */}
           <div className="mt-2">
-            <Button name={loading ? "Loading" : "Login"} />
+            <Button name={loading ? <Spinner/> : "Login"} />
           </div>
         </form>
       </div>
