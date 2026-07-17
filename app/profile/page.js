@@ -1,7 +1,9 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
+  const router = useRouter()
   const [user, setUser] = useState({
     username: "",
     name: "",
@@ -63,6 +65,7 @@ const Profile = () => {
         ...data.usersinfo,
         ...data.addresses,
       }));
+      
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +77,7 @@ const Profile = () => {
 
   const logout = async () => {
     try {
-      const res = await fetch("/api/logout", {
+      const res = await fetch("/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -93,26 +96,27 @@ const Profile = () => {
       console.error("Logout failed:", error);
     }
   };
+
   return (
     <>
-      <div className="min-h-screen bg-neutral-900 py-10 px-4">
-        <div className="max-w-2xl mx-auto bg-neutral-700  rounded-3xl shadow-lg p-8">
+      <div className="min-h-screen py-10 px-4 ">
+        <div className="max-w-2xl mx-auto rounded-3xl shadow-lg p-8">
           {/* Header */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-24 h-24 rounded-full bg-green-300 flex items-center justify-center text-3xl font-bold text-white">
+            <div className="w-24 h-24 rounded-full bg-green-300 flex items-center justify-center text-3xl font-bold ">
               DS
             </div>
 
             <h1 className="text-2xl font-bold mt-4">My Profile</h1>
             <button
               onClick={logout}
-              className="mt-4 px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition"
+              className="mt-4 px-5 py-2 bg-red-500 hover:bg-red-600  rounded-xl transition"
             >
               Logout
             </button>
             <button
               onClick={getUser}
-              className="mt-4 px-5 py-2 bg-yellow-500 hover:bg-red-600 text-white rounded-xl transition"
+              className="mt-4 px-5 py-2 bg-yellow-500 hover:bg-red-600  rounded-xl transition"
             >
               Refresh Profile
             </button>
@@ -266,7 +270,7 @@ const Profile = () => {
 
           <button
             onClick={updateData}
-            className="w-full mt-8 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold transition"
+            className="w-full mt-8 bg-green-500 hover:bg-green-600  py-3 rounded-xl font-semibold transition"
           >
             Save Changes
           </button>

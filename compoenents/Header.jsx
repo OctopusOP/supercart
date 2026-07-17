@@ -4,7 +4,6 @@ import { IoPerson } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { GiHamburgerMenu, GiCrossMark } from "react-icons/gi";
-import { ImCross } from "react-icons/im";
 
 import { useState } from "react";
 
@@ -12,8 +11,8 @@ const Header = () => {
   const [HamMenu, setHamMenu] = useState(false);
 
   return (
-    <header className="relative">
-      <div className="w-full flex flex-row items-center bg-neutral-800 py-4 px-3 text-2xl">
+    <header className="relative shadow-md">
+      <div className="w-full flex flex-row items-center py-4 px-3 text-2xl">
         <div className="flex gap-2">
           <GiHamburgerMenu
             onClick={() => setHamMenu(true)}
@@ -41,7 +40,7 @@ const Header = () => {
         <>
           <div
             onClick={() => setHamMenu(false)}
-            className="z-99  sm:hidden flex flex-col items-center min-w-[40%] min-h-screen gap-2 pb-4 bg-neutral-800 absolute top-0"
+            className="z-99  sm:hidden flex flex-col items-center min-w-[40%] min-h-screen gap-2 pb-4 bg-neutral-100 shadow-2xl absolute top-0"
           >
             <GiCrossMark
               className="absolute right-5 top-3 text-2xl"
