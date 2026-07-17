@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [passeye, setPasseye] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.currentTarget;
 
@@ -36,6 +38,7 @@ const LoginPage = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false)
   };
 
   return (
@@ -84,7 +87,7 @@ const LoginPage = () => {
 
           {/* Submit Button Wrapper */}
           <div className="mt-2">
-            <Button name={"Login"} />
+            <Button name={loading ? "Loading" : "Login"} />
           </div>
         </form>
       </div>
