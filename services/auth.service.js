@@ -1,6 +1,4 @@
 import supabase from "@/db/supabase.js";
-import { comparePassword, encryptPassword } from "../utils/hash.js";
-import { NextResponse } from "next/server.js";
 
 export const checkEmailExists = async (email) => {
   try {
@@ -76,7 +74,7 @@ export const validateUser = async (userinfo, password) => {
       .from("users")
       .select("id,username,email,password_hash")
       .eq(table, userinfo)
-      .single();
+      .maybeSingle();
 
     if (data) {
       return data;

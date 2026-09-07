@@ -1,28 +1,41 @@
 import { NextResponse } from "next/server";
 
-export function proxy(request) {
+export default function proxy(request) {
   const token = request.cookies.get("auth_token")?.value;
+  const { pathname } = request.nextUrl;
 
-  const pathname = request.nextUrl.pathname;
+  // 1. Define exact static public routes
+  const exactPublicRoutes = [
+    "/",
+    "/login",
+    "/register",
+    "/about",
+    "/contact",
+    "/cart",
+    "/products",
+  ];
 
-  const publicRoutes = ["/login", "/register","/about","/contact", "/"];
+  // 2. Check for dynamic public routes (matches /products/123, /products/abc, etc.)
+  const isDynamicPublicRoute = pathname.startsWith("/products/");
 
-  if (publicRoutes.includes(pathname)) {
+  // 3. Determine if current path is allowed publicly
+  const isPublicRoute = exactPublicRoutes.includes(pathname) || isDynamicPublicRoute;
+
+  if (isPublicRoute) {
     return NextResponse.next();
   }
 
-  // If not logged in, redirect to login
+  // 4. Redirect unauthenticated users to login for protected routes
   if (!token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // Exclude API routes, static files, image optimizations, and .png files
-    "/((?!api|_next/static|_next/image|.*\\.png$).*)",
-    //Include Secured Routes
-    "/profile/:path*",
-    "/dashboard/:path*",
+    // Exclude API routes, static Next files, and common static assets
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
