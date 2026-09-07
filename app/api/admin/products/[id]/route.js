@@ -1,4 +1,3 @@
-
 import { requireAdmin } from "@/lib/requireAdmin";
 import supabase from "@/db/supabase";
 import { NextResponse } from "next/server";

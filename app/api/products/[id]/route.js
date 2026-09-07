@@ -1,4 +1,4 @@
-```js
+
 // app/api/products/[id]/route.js
 
 import { getProductDetails } from "@/services/product.service";
@@ -49,4 +49,4 @@ export async function GET(request, { params }) {
     );
   }
 }
-```
+
